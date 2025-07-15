@@ -32,5 +32,5 @@ Thumbs.db
 .idea/
 
 # Data files (if sensitive or large)
-#data/
+data/
 "data/" 

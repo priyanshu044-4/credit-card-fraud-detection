@@ -1,0 +1,25 @@
+# Auto-detect and normalize line endings
+* text=auto
+# Ignore virtual environment
+venv/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore models and sensitive data
+models/*.pkl
+*.csv
+*.log
+
+# Ignore IDE/editor configs
+.vscode/
+.idea/
+*.swp

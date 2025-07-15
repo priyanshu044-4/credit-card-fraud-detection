@@ -3,17 +3,26 @@ import pickle
 import numpy as np
 import os
 import sys
+import requests
+import io
 
 # Add root to path to allow script imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from scripts.preprocess import load_and_preprocess
+from scripts.preprocess import load_and_preprocess  # Optional, in case used later
 
 app = Flask(__name__)
 
-# Load the upgraded model (XGBoost or best available)
-model_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'models', 'xgb_model.pkl'))
-with open(model_path, 'rb') as f:
-    model = pickle.load(f)
+# 🔗 Load model from Google Drive
+model_url = "https://drive.google.com/uc?export=download&id=1GiarLLxigYgnZSdG4carSthLbN4iMS_A"
+try:
+    print("📥 Downloading model from Google Drive...")
+    response = requests.get(model_url)
+    response.raise_for_status()  # Raise error if download fails
+    model = pickle.load(io.BytesIO(response.content))
+    print("✅ Model loaded successfully.")
+except Exception as e:
+    print(f"❌ Failed to load model: {e}")
+    model = None
 
 @app.route('/')
 def home():
@@ -21,6 +30,9 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    if model is None:
+        return jsonify({"error": "Model not loaded"}), 500
+
     try:
         data = request.json
 

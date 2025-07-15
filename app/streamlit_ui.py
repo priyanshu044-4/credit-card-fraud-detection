@@ -66,7 +66,7 @@ with st.form("fraud_form"):
 # --- Prediction ---
 if submitted:
     try:
-        response = requests.post("http://127.0.0.1:5000/predict", json=inputs)
+        response = requests.post("https://credit-card-fraud-api-0vy3.onrender.com/predict", json=inputs)
         if response.status_code == 200:
             result = response.json()
             if result["prediction"] == 1:

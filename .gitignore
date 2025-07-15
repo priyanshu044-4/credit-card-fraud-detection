@@ -33,3 +33,4 @@ Thumbs.db
 
 # Data files (if sensitive or large)
 #data/
+"data/" 

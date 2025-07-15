@@ -12,7 +12,7 @@ __pycache__/
 Thumbs.db
 # Ignore models and sensitive data
 models/*.pkl
-*.csv
+*.csv filter=lfs diff=lfs merge=lfs -text
 *.log
 # Ignore IDE/editor configs
 .vscode/

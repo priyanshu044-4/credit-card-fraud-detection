@@ -20,7 +20,7 @@ env/
 Thumbs.db
 
 # Model files
-*.pkl
+#*.pkl
 *.joblib
 *.sav
 
@@ -32,4 +32,4 @@ Thumbs.db
 .idea/
 
 # Data files (if sensitive or large)
-data/
+#data/

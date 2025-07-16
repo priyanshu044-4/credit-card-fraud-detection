@@ -3,22 +3,28 @@ import pickle
 import numpy as np
 import os
 import sys
-import requests
-import io
+import gdown
 
 # Add root to path to allow script imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-#from scripts.preprocess import load_and_preprocess  # Optional, in case used later
 
 app = Flask(__name__)
 
-# 🔗 Load model from Google Drive
-model_url = "https://drive.google.com/uc?export=download&id=1GiarLLxigYgnZSdG4carSthLbN4iMS_A"
+# 🔗 Google Drive direct file ID for the model
+gdown_url = "https://drive.google.com/uc?id=1GiarLLxigYgnZSdG4carSthLbN4iMS_A"
+model_path = "models/xgb_model.pkl"
+os.makedirs("models", exist_ok=True)
+
+# 🔁 Download model if not exists
 try:
-    print("📥 Downloading model from Google Drive...")
-    response = requests.get(model_url)
-    response.raise_for_status()  # Raise error if download fails
-    model = pickle.load(io.BytesIO(response.content))
+    if not os.path.exists(model_path):
+        print("📥 Downloading model from Google Drive...")
+        gdown.download(gdown_url, model_path, quiet=False)
+    else:
+        print("✅ Model already exists. Skipping download.")
+
+    with open(model_path, 'rb') as f:
+        model = pickle.load(f)
     print("✅ Model loaded successfully.")
 except Exception as e:
     print(f"❌ Failed to load model: {e}")

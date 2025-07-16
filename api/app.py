@@ -8,7 +8,7 @@ import io
 
 # Add root to path to allow script imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from scripts.preprocess import load_and_preprocess  # Optional, in case used later
+#from scripts.preprocess import load_and_preprocess  # Optional, in case used later
 
 app = Flask(__name__)
 
